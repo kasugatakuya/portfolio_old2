@@ -33,7 +33,7 @@ export default function Layout({ children, home }) {
               src="/images/profile.jpg"
               className={utilStyles.borderCircle}
               height={144}
-              width={144}
+              width={190}
               alt={name}
             />
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
@@ -47,7 +47,7 @@ export default function Layout({ children, home }) {
                   src="/images/profile.jpg"
                   className={utilStyles.borderCircle}
                   height={108}
-                  width={108}
+                  width={150}
                   alt={name}
                 />
               </a>
@@ -64,7 +64,7 @@ export default function Layout({ children, home }) {
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
-            <a>← Back to home</a>
+            <a>← TOPに戻る</a>
           </Link>
         </div>
       )}
