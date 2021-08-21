@@ -1,4 +1,4 @@
-import { Card } from './index.js'
+import Card  from './card.js'
 import styles from './card_list.module.css'
 
 const CardList = () => {
