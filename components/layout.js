@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from './Layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
-import { Header } from '../components/Header/index.js'
+import { Header } from './Header/index.js'
 
 const name = 'Kasuga Portfolio'
 export const siteTitle = '春日拓也のポートフォリオ'
