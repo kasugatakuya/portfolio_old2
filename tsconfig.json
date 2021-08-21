@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/_app.js", "components/Card/card.js"  ],
+, "pages/_app.js", "components/card/card.js"  ],
   "exclude": [
     "node_modules"
   ]
