@@ -2,7 +2,8 @@ import React, {useState, useCallback} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { HeaderMenus, ClosableDrawer } from './index.js';
+import HeaderMenus from './header_menus.js';
+import ClosableDrawer from './closable_drawer.js';
 import Link from 'next/link'
 
 const useStyles = makeStyles({
