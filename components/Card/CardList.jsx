@@ -1,5 +1,5 @@
-import MediaCard from '/components/card'
-import styles from './card-list.module.css'
+import Card from '/components/Card/Card'
+import styles from './CardList.module.css'
 
 const CardList = () => {
   const contents = [
@@ -39,7 +39,7 @@ const CardList = () => {
       <div className={styles.grid}>
         {contents.length > 0 && (
           contents.map(content => (
-            <MediaCard
+            <Card
               key={content.id}
               id={content.id}
               file={content.file}
