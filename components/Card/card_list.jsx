@@ -1,5 +1,5 @@
-import Card from '/components/Card/Card'
-import styles from './CardList.module.css'
+import { Card } from './index.js'
+import styles from './card_list.module.css'
 
 const CardList = () => {
   const contents = [
