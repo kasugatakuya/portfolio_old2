@@ -5,7 +5,7 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Date from '../components/date'
-import CardList from '../components/card/card_list.js'
+import CardList from '../components/card_list.js'
 
 export const getStaticProps: GetStaticProps = async() => {
   const allPostsData = getSortedPostsData()
