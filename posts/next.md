@@ -1,9 +1,31 @@
 ---
 title: 'Next.jsとは'
-date: '2021-08-11'
+date: '2021-08-22'
 ---
 
-- **Static Generation** is the pre-rendering method that generates the HTML at **build time**. The pre-rendered HTML is then _reused_ on each request.
-- **Server-side Rendering** is the pre-rendering method that generates the HTML on **each request**.
+Next.js(ネクストジェイエス)は、Vercel社によって開発されたJavaScriptフレームワークです。Reactと組み合わせてウェブアプリ開発を強化するフレームワークであり、Reactアプリのサーバーサイドレンダリング(SSR)・スタティックサイトジェネレーター(SSG)を可能にする。
 
-Importantly, Next.js lets you **choose** which pre-rendering form to use for each page. You can create a "hybrid" Next.js app by using Static Generation for most pages and using Server-side Rendering for others.
+Reactだけでもウェブアプリを構築できますが、Reactだけで構築するとフロントエンドで動作するウェブアプリとなります。ReactにNext.jsを組み合わせることで、SSR・SSGするReactアプリを構築できる。
+
+## 【SSR・SSG】
+Reactはシングルページアプリケーション(SPA)として単一の巨大なJavaScriptを生成します。それに対して、Next.jsはアプリケーションを事前にページ単位でレンダリングします。クライアントからのリクエスト時にレンダリングするのがSSR(Server Side Rendering)と呼ばれる機能。またビルド時にレンダリングする機能もあり、SSG(Static Site Generation)と呼ばれます。これらの機能により、各ページ読み込み時のダウンロードファイルサイズを削減できます。またURLごとに個別のHTMLが生成されるのでSEOに有利。
+
+## 【ファイルベースルーティング】
+ReactはSPAとしての性質上、疑似的にURLを書き換えて見かけ上のページ遷移を実現しています。表示内容はjsによって書き換えられます。その際にreact-router-domライブラリを使用しますが、URLとコンポーネントの対応付けなどがやや面倒。
+
+Next.jsはpages/ディレクトリに置いたフォルダ/ファイルの構成に従って、HTMLを生成してページ遷移を実現します。ルーティングライブラリは不要で、URLの構造に合わせてjs(ts)ファイルを配置するだけで済む。
+
+## 【高速リロード(Fast Refresh)】
+Reactの開発サーバは変更を検知してページ全体をリロードします。Next.jsの開発サーバはソースコードの変更を検知して、stateを保持したまま変更があった個所だけを更新してくれます。これにより、開発体験が大幅に向上する。例えば、フォームに入力した内容を保持したままタイトルのfont-sizeを変更することなどができる。
+
+この機能は関数コンポーネントとReact Hooksでのみ利用可能。(Classコンポーネントではstateを保持してリロードできない)
+
+## 【画像最適化】
+Next.js 10.0.0から専用の画像コンポーネントが追加され、配置されるサイズに応じて元画像をトリミングして配信してくれるようになりました。必要なサイズのデータだけをダウンロードするので画像の表示を大幅に高速化できる
+next/imageコンポーネントのwidth/heightを指定しておくとそのサイズまであらかじめ画像を圧縮してくれる。また、レスポンス表示で幅が小さくなった場合も自動でそのサイズにトリミングした画像を生成してくれる。
+
+## 【ゼロコンフィグ】
+上記すべてについて、webpack等の設定の必要がない。
+しかし、実用上の細かな設定は手動で行う必要がある。その場合はnext.config.jsに各種設定を書くと自動で読み込み、webpackの設定に追加してくれる。
+例えばlessの設定用のプラグインなどが公式からnpmで配布されている。
+よく使われるものはたいていそろっており、これらを使えばほぼゼロコンフィグでかなりの部分まで設定できるようになっている。

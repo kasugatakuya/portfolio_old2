@@ -1,19 +1,35 @@
 ---
-title: 'SSGとSSRの違い'
-date: '2021-08-19'
+title: 'SSRとSSGの違い'
+date: '2021-08-20'
 ---
 
-We recommend using **Static Generation** (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.
+## 【SSR】
+「Server Side Rendering」の略。Vue.jsやReactコンポーネントをサーバー側で評価、実行し、その結果を配信する。
+オリジンサーバーにリクエストがあるたびに上記の処理を行い、HTMLファイルを生成する。そのため、サーバーの負荷は他の2つより高くなる傾向があり、TTFB（Time To First Byte）の時間も長くなる。
+Nuxt.jsやNext.jsを使って実装することが多い。
 
-You can use Static Generation for many types of pages, including:
+メリット
+- レンダリング後のファイルを返却するためコンテンツ表示までの時間を短縮できる
+- SEOに有利
+- 動的なOGP対応が可能
 
-- Marketing pages
-- Blog posts
-- E-commerce product listings
-- Help and documentation
+デメリット
+- キャッシュ設定が複雑になりがち
+- SSRするためのWebサーバーが必要になる
 
-You should ask yourself: "Can I pre-render this page **ahead** of a user's request?" If the answer is yes, then you should choose Static Generation.
+## 【SSG】
+「Static Site Generator」の略。
+アプリのビルド時にあらかじめページ表示に必要なデータを取得し、各ページごとに静的なHTMLファイルを出力しておく。そしてサーバーへのリクエスト時にはこのHTMLファイルを返却する。
+ブラウザが静的なHTMLファイルを取得するのはサイトへの初回リクエスト時のみで、ページ遷移時には代わりにJSONファイルを取得し、動的に変化する部分はこのJSONファイル内のデータを使ってレンダリングする。
+Nuxt.js、Next.js、Gatsby.jsなどが対応。Next.jsではSSRとSSGを混在させることもできる。
 
-On the other hand, Static Generation is **not** a good idea if you cannot pre-render a page ahead of a user's request. Maybe your page shows frequently updated data, and the page content changes on every request.
+メリット
+- ページ表示までに必要な時間はClient Side Rendering、SSRより高速
+- SEOに有利
+- 動的なOGP対応が可能
 
-In that case, you can use **Server-Side Rendering**. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate data.
+※OGPとは「Open Graph Protcol」の略で、FacebookやTwitterなどのSNSでシェアした際に、設定したWEBページのタイトルやイメージ画像、詳細などを正しく伝えるためのhtml要素。設定しておくと、SNS上でURLが共有された際にタイトルや画像、説明文などが表示されるようになり、ユーザーに対してページの内容を詳しく伝えることができます。
+
+デメリット
+- 外部からデータを取得している場合、外部データが更新されたタイミングで再ビルドを行わないと変更は反映されない
+- 上記の仕様から動的なデータが頻繁に変更される場合は採用しにくい。その場合はSSRのほうがマッチする
