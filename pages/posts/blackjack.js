@@ -30,13 +30,14 @@ export default function FirstPost() {
         height={200}
       />
       <p>
-        本場のカジノのブラックジャックゲームが楽しめる。<br></br>
+        本場カジノのブラックジャックゲームが楽しめる。<br></br>
         HTML・CSS・JavaScript・Firebaseで作成。<br></br>
         ブラックジャックのルールは本場のカジノと同じ。<br></br>
         ヒット・ダブルダウン・スタンド・スプリット・インシュランスができる。<br></br>
         持ち金は1000$スタートでゲーム内のお金を賭けてプレイできる。<br></br>
         ベーシックストラテジー(最善手)を見ながらプレーできる。<br></br>
         カウンティング表を見ながらプレーできる。<br></br>
+        試しに遊んでみましょう!!<br></br>
       </p>
       <div className={classes.flex_box}>
         <div>
