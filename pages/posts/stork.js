@@ -67,18 +67,6 @@ export default function FirstPost() {
             </Button>
           </a>
         </div>
-        <div>
-          <a href="https://demo-opencage.com/stork/" target="_blank" rel="noopener noreferrer">
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              endIcon={<OpenInNewIcon />}
-            >
-              参考元サイトへ
-            </Button>
-          </a>
-        </div>
       </div>
     </Layout>
   )
