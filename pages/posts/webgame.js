@@ -56,7 +56,7 @@ export default function FirstPost() {
               className={classes.button}
               endIcon={<OpenInNewIcon />}
             >
-              GitHubへ
+              GITHUBへ
             </Button>
           </a>
         </div>
