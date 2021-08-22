@@ -35,7 +35,7 @@ export default function Home({ allPostsData }: Props) {
         <section className={utilStyles.headingMd}>
           <h2>プロフィール</h2>
           <p>
-            本名は春日拓也。長野県出身。好きな食べ物はカレー。元薬剤師。フロントエンドエンジニアとして働いています。新しい技術に興味があり、Reactを使った個人開発も積極的におこなっています。
+            本名:春日拓也。長野県出身。好きな食べ物はカレー。元薬剤師。フロントエンドエンジニアとして働いています。新しい技術に興味があり、Reactを使った個人開発も積極的におこなっています。
           </p>
         </section>
         <CardList />
