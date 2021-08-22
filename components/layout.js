@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from './layout.module.css'
+import styles from '../styles/layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import {useState, useCallback} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import HeaderMenus from './header_menus.js';
-import ClosableDrawer from './closable_drawer.js';
+import HeaderMenus from '../components/header_menus.js';
+import ClosableDrawer from '../components/closable_drawer.js';
 
 const useStyles = makeStyles({
   root: {

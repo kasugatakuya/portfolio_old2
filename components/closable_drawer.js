@@ -1,7 +1,7 @@
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
-import Product from './product.js';
+import Product from '../components/product.js';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
