@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/_app.js", "components/card.js"  ],
+, "pages/_app.js", "components/card.js", "components/closable_drawer.js"  ],
   "exclude": [
     "node_modules"
   ]

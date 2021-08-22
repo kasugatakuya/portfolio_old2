@@ -1,4 +1,3 @@
-import React from 'react'
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
@@ -88,7 +87,6 @@ const ClosableDrawer = (props) => {
           )}
         </div>
         <Divider />
-        <div className={classes.title}>ブログ</div>
       </Drawer>
     </nav>
   )
