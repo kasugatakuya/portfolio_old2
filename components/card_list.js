@@ -6,7 +6,7 @@ const CardList = () => {
     {
       id: 1,
       file: 'blackjack',
-      title: 'BlackJack',
+      title: 'BLACK JACK',
       description: 'トランプのブラックジャックゲーム。JavaScriptで作成',
       images: 'blackjack.png'
     },
