@@ -3,12 +3,51 @@ import Image from 'next/image'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
-import Header from './header.js'
+import {useState, useCallback} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import HeaderMenus from './header_menus.js';
+import ClosableDrawer from './closable_drawer.js';
+
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+  },
+  menuBar: {
+    backgroundColor: "#fff",
+    color: "444",
+  },
+  toolBar: {
+    margin: '0 auto',
+    maxWidth: 1024,
+    width: '100%'
+  },
+  iconButton: {
+    margin: '0 0 0 auto'
+  },
+  title: {
+    color: "#212121",
+    fontWeight: "bold"
+  }
+});
 
 const name = 'Kasuga Portfolio'
 export const siteTitle = '春日拓也のポートフォリオ'
 
 export default function Layout({ children, home }) {
+  const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerToggle = useCallback((e) => {
+    if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift')) {
+      return;
+    }
+    setOpen(!open)
+
+  }, [setOpen, open]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,8 +65,22 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Header />
       <header className={styles.header}>
+        <div className={classes.root}>
+          <AppBar position="fixed" className={classes.menuBar}>
+            <Toolbar className={classes.toolBar}>
+              <div>
+                <Link href="/">
+                  <a className={classes.title}>Kasuga Portfolio</a>
+                </Link>
+              </div>
+              <div className={classes.iconButton}>
+                <HeaderMenus handleDrawerToggle={handleDrawerToggle}/>
+              </div>
+            </Toolbar>
+          </AppBar>
+          <ClosableDrawer open={open} onClose={handleDrawerToggle} />
+        </div>
         {home ? (
           <>
             <Image
