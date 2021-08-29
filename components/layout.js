@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import HeaderMenus from '../components/header_menus.js';
-import ClosableDrawer from '../components/closable_drawer.js';
+import ClosableDrawer from './closable_drawer.js';
 
 const useStyles = makeStyles({
   root: {

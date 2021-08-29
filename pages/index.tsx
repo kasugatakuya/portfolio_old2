@@ -7,6 +7,22 @@ import { getSortedPostsData } from '../lib/posts'
 import Date from '../components/date'
 import Card  from '../components/card.js'
 import cardListStyles from '../styles/card_list.module.css'
+import { useMail } from '../components/useMail';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles({
+  big_space: {
+    marginTop: "60px"
+  },
+  space: {
+    marginTop: "15px"
+  },
+  form: {
+    maxWidth: "900px"
+  }
+});
 
 export const getStaticProps: GetStaticProps = async() => {
   const allPostsData = getSortedPostsData()
@@ -27,6 +43,13 @@ type Props = {
 }
 
 export default function Home({ allPostsData }: Props) {
+  const classes = useStyles();
+  const { setName, setMail, setMessage, send} = useMail();
+  const resetForm = () => {
+    document.getElementById('name').value = '';
+    document.getElementById('mail').value = '';
+    document.getElementById('text').value = '';
+  }
   const contents = [
     {
       id: 1,
@@ -101,6 +124,48 @@ export default function Home({ allPostsData }: Props) {
             </li>
             ))}
           </ul>
+        </section>
+        <section className={classes.big_space}>
+          <h2>お問い合わせ</h2>
+          <div>
+            <div>
+              <TextField 
+                id="name"
+                label="お名前"
+                fullWidth
+                variant="outlined"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <TextField 
+                id="mail"
+                label="メールアドレス"
+                fullWidth
+                variant="outlined"
+                type="text"
+                onChange={(e) => setMail(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <TextField
+                id="text"
+                label="メッセージ"
+                fullWidth
+                multiline
+                rows="10"
+                variant="outlined"
+                onChange={(e) => setMessage(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <Button variant="contained" type="button" onClick={() => {send(); resetForm()}}>送信</Button>
+            </div>
+          </div>
         </section>
       </Layout>
     </>
