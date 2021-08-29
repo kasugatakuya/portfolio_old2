@@ -7,6 +7,22 @@ import { getSortedPostsData } from '../lib/posts'
 import Date from '../components/date'
 import Card  from '../components/card.js'
 import cardListStyles from '../styles/card_list.module.css'
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { useState } from "react";
+
+const useStyles = makeStyles({
+  big_space: {
+    marginTop: "60px"
+  },
+  space: {
+    marginTop: "15px"
+  },
+  form: {
+    maxWidth: "900px"
+  }
+});
 
 export const getStaticProps: GetStaticProps = async() => {
   const allPostsData = getSortedPostsData()
@@ -27,6 +43,9 @@ type Props = {
 }
 
 export default function Home({ allPostsData }: Props) {
+  const classes = useStyles();
+
+  // 制作物設定
   const contents = [
     {
       id: 1,
@@ -57,6 +76,32 @@ export default function Home({ allPostsData }: Props) {
       images: 'webgame.png'
     }
   ];
+
+  // 問い合わせメール設定
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const send = async () => {
+    await fetch('/api/mail', {
+      method: 'POST',
+      body: `
+      【名前】
+      ${name}
+
+      【メールアドレス】
+      ${mail}
+
+      【お問い合わせ内容】
+      ${message}
+      `,
+    });
+    setName("");
+    setMail("");
+    setMessage("");
+    alert('送信が完了しました。後日メールにてご連絡させていただきます。')
+  };
+
   return (
     <>
       <Layout home>
@@ -101,6 +146,51 @@ export default function Home({ allPostsData }: Props) {
             </li>
             ))}
           </ul>
+        </section>
+        <section className={classes.big_space}>
+          <h2>お問い合わせ</h2>
+          <div>
+            <div>
+              <TextField 
+                id="name"
+                label="お名前"
+                value={name}
+                fullWidth
+                variant="outlined"
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <TextField 
+                id="mail"
+                label="メールアドレス"
+                value={mail}
+                fullWidth
+                variant="outlined"
+                type="text"
+                onChange={(e) => setMail(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <TextField
+                id="text"
+                label="メッセージ"
+                value={message}
+                fullWidth
+                multiline
+                rows="10"
+                variant="outlined"
+                onChange={(e) => setMessage(e.target.value)}
+                className={classes.form}
+              />
+            </div>
+            <div className={classes.space}>
+              <Button variant="contained" type="button" onClick={send}>送信</Button>
+            </div>
+          </div>
         </section>
       </Layout>
     </>
