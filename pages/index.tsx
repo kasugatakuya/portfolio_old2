@@ -7,10 +7,10 @@ import { getSortedPostsData } from '../lib/posts'
 import Date from '../components/date'
 import Card  from '../components/card.js'
 import cardListStyles from '../styles/card_list.module.css'
-import { useMail } from '../components/useMail';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { useState } from "react";
 
 const useStyles = makeStyles({
   big_space: {
@@ -44,12 +44,8 @@ type Props = {
 
 export default function Home({ allPostsData }: Props) {
   const classes = useStyles();
-  const { setName, setMail, setMessage, send} = useMail();
-  const resetForm = () => {
-    document.getElementById('name').value = '';
-    document.getElementById('mail').value = '';
-    document.getElementById('text').value = '';
-  }
+
+  // 制作物設定
   const contents = [
     {
       id: 1,
@@ -80,6 +76,32 @@ export default function Home({ allPostsData }: Props) {
       images: 'webgame.png'
     }
   ];
+
+  // 問い合わせメール設定
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const send = async () => {
+    await fetch('/api/mail', {
+      method: 'POST',
+      body: `
+      【名前】
+      ${name}
+
+      【メールアドレス】
+      ${mail}
+
+      【お問い合わせ内容】
+      ${message}
+      `,
+    });
+    setName("");
+    setMail("");
+    setMessage("");
+    alert('送信が完了しました。後日メールにてご連絡させていただきます。')
+  };
+
   return (
     <>
       <Layout home>
@@ -132,6 +154,7 @@ export default function Home({ allPostsData }: Props) {
               <TextField 
                 id="name"
                 label="お名前"
+                value={name}
                 fullWidth
                 variant="outlined"
                 type="text"
@@ -143,6 +166,7 @@ export default function Home({ allPostsData }: Props) {
               <TextField 
                 id="mail"
                 label="メールアドレス"
+                value={mail}
                 fullWidth
                 variant="outlined"
                 type="text"
@@ -154,6 +178,7 @@ export default function Home({ allPostsData }: Props) {
               <TextField
                 id="text"
                 label="メッセージ"
+                value={message}
                 fullWidth
                 multiline
                 rows="10"
@@ -163,7 +188,7 @@ export default function Home({ allPostsData }: Props) {
               />
             </div>
             <div className={classes.space}>
-              <Button variant="contained" type="button" onClick={() => {send(); resetForm()}}>送信</Button>
+              <Button variant="contained" type="button" onClick={send}>送信</Button>
             </div>
           </div>
         </section>
