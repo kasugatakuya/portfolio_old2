@@ -83,6 +83,16 @@ export default function Home({ allPostsData }: Props) {
   const [message, setMessage] = useState('');
 
   const send = async () => {
+    if (name === "") {
+      alert("お名前を入力してください");
+      return;
+    } else if (mail === "") {
+      alert("メールアドレスを入力してください");
+      return;
+    } else if (message === "") {
+      alert("メッセージを入力してください");
+      return;
+    }
     await fetch('/api/mail', {
       method: 'POST',
       body: `
